@@ -1,0 +1,68 @@
+<!-- https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Generic_views  use post_list here-->      
+{% extends 'blog/base.html' %}
+{% block content %}
+<div  class="content container blogwidth">
+    {% for post in post_list%}
+        
+        <article class="media content-section">
+                <div class="row">
+                        <div class="col-md-1">
+                                <img class="rounded article-img" src="../static/img/sumon.PNG">
+                        </div>
+                        <div class="col-md-11">
+                                <div class="media-body">
+                                        <div class="article-metadata">
+                                        <a class="mr-2" href="">Sumon</a>
+                                        <small class="text-muted">{{ post.published_date|date:"D M Y" }}</small>
+                                        </div>
+                                        <h2><a class="article-title" href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+                                        <p class="article-content">{% autoescape off %}{{ post.text | truncatewords:100 }}{% endautoescape %}</p>
+                                    </div>
+                        </div>
+                    </div>
+        <!-- <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}"> -->
+       
+        
+        </article>
+        <!-- <div class="card">
+            <a class="card-header" href="{% url 'post_detail' pk=post.pk %}">{{ post.title}}</a>
+            <div class="card-body">{% autoescape off %}{{ post.text | truncatewords:100 }}{% endautoescape %}</div> 
+            <div class="card-footer">Published on: {{post.published_date|date:"D M Y"}}</div>
+        </div>
+        
+        <hr> -->
+
+        <!-- <div class="container">
+            <h1>
+                <a href="{% url 'post_detail' pk=post.pk %}">{{ post.title}}</a>
+            </h1>
+            <div class="date">
+                <p>Published on: {{post.published_date|date:"D M Y"}}</p>
+            </div>
+            <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.approve_comments.count }}</a>
+            <p class="article-content">{% autoescape off %}{{ post.text | truncatewords:100 }}{% endautoescape %}</p>
+        </div> -->
+    {% endfor %}
+    {% if is_paginated %}
+
+      {% if page_obj.has_previous %}
+        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+            <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+      {% endif %}
+
+    {% endif %}
+</div>
+{% endblock %}

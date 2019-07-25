@@ -1,0 +1,43 @@
+<!-- The name of this html file come from form.py model class name CommentForm 
+make lower case comment_form(https://docs.djangoproject.com/en/2.2/topics/class-based-views/generic-display/)-->
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <h1>New Comment</h1>
+    <form class="post-form" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Post Comment</button>
+    </form>
+    <script>
+    // var editor = new MediumEditor('.editable');
+    var editor = new MediumEditor('.editable', {
+    delay: 1000,
+    targetBlank: true,
+    toolbar: {
+        buttons: ['bold', 'italic', 'quote','image'],
+        diffLeft: 25,
+        diffTop: 10,
+    },
+    anchor: {
+        placeholderText: 'Type a link',
+        customClassOption: 'btn',
+        customClassOptionText: 'Create Button'
+    },
+    paste: {
+        forcePlainText: true,
+        cleanPastedHTML: false,
+        cleanAttrs: ['style', 'dir'],
+        cleanTags: ['label', 'meta'],
+        unwrapTags: ['sub', 'sup']
+    },
+    anchorPreview: {
+        hideDelay: 300
+    },
+    placeholder: {
+        text: 'Click to edit'
+    }
+});
+    //editable class is send through CommentFrom class via widget as from.as_p is called all thing from CommentFrom class
+    </script>
+{% endblock %}

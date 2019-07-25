@@ -1,0 +1,10 @@
+<!-- https://kite.com/python/docs/django.views.generic.edit.DeleteView 
+for how post_confirm_delete.html work with DeleteView -->
+{% extends 'blog/base.html' %}
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        <p>Are you sure you want to delete "{{ object }}" ?</p>
+        <input class="btn btn-danger" type="submit" value="Confirm" />
+    </form>
+{% endblock %}

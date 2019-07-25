@@ -1,0 +1,19 @@
+{% extends 'blog/base.html'%}
+
+{% block content %}
+<div>
+    <h2> Please Login: </h2>
+    <h3>(Must be SuperUser, Please check admin for issue)</h3>
+    {% if form.errors %}
+        <p>Your Username and password did not mach.Please try again !</p>
+
+    {% endif %}
+    <form action = "{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+         <input type="submit" class='btn btn-primary' value="Login" onclick="console.log('click')" />
+         <input type="hidden" name="next" value= "{{ next }}" />
+         <!-- Defaults to next. Overrides the next_page URL -->
+    </form>
+</div>
+{% endblock %}

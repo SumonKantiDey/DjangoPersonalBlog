@@ -1,0 +1,36 @@
+<!-- The name of this html file come from form.py model class name PostForm 
+make lower case post_form(https://docs.djangoproject.com/en/2.2/topics/class-based-views/generic-display/)-->
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <div  class="content container blogwidth">
+        <h1>New Post</h1>
+        <form class="post-form" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save btn btn-default">Save</button>
+        </form>
+    </div>
+    <script>
+    // var editor = new MediumEditor('.editable');
+    //editable class is send through PostFrom class via widget as from.as_p is called all thing from PostFrom class
+    // enable the 'pre' button
+    // enable the 'pre' button
+    var editor = new MediumEditor('.editable', {
+        toolbar: {
+            buttons: ['bold', 'italic', 'underline', 'h1', 'h2', 'pre']
+        }
+    });
+
+    // enable the 'pre' button with custom content
+    // var editor = new MediumEditor('.editable', {
+    //     toolbar: {
+    //         buttons: ['bold', 'italic', 'underline', 'h1', 'h2', {
+    //             name: 'pre',
+    //             contentDefault: 'code snippet', // default text
+    //             contentFA: '<i class="fa fa-code"></i>' // custom icon if you're using font-awesome icons
+    //         }]
+    //     }
+    // });
+    </script>
+{% endblock %}
