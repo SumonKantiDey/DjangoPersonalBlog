@@ -11,16 +11,17 @@ make lower case post_form(https://docs.djangoproject.com/en/2.2/topics/class-bas
             <button type="submit" class="save btn btn-default">Save</button>
         </form>
     </div>
+    <!--
     <script>
     // var editor = new MediumEditor('.editable');
     //editable class is send through PostFrom class via widget as from.as_p is called all thing from PostFrom class
     // enable the 'pre' button
     // enable the 'pre' button
-    var editor = new MediumEditor('.editable', {
-        toolbar: {
-            buttons: ['bold', 'italic', 'underline', 'h1', 'h2', 'pre']
-        }
-    });
+    // var editor = new MediumEditor('.editable', {
+    //     toolbar: {
+    //         buttons: ['bold', 'italic', 'underline', 'h1', 'h2', 'pre']
+    //     }
+    // });
 
     // enable the 'pre' button with custom content
     // var editor = new MediumEditor('.editable', {
@@ -33,4 +34,35 @@ make lower case post_form(https://docs.djangoproject.com/en/2.2/topics/class-bas
     //     }
     // });
     </script>
+    -->
+    <script>
+     var editor = new MediumEditor('.editable', {
+        delay: 1000,
+        targetBlank: true,
+        toolbar: {
+            buttons: ['bold', 'italic', 'quote','image','underline', 'h1', 'h2', 'pre'],
+            diffLeft: 25,
+            diffTop: 10,
+        },
+        anchor: {
+            placeholderText: 'Type a link',
+            customClassOption: 'btn',
+            customClassOptionText: 'Create Button'
+        },
+        paste: {
+            forcePlainText: true,
+            cleanPastedHTML: false,
+            cleanAttrs: ['style', 'dir'],
+            cleanTags: ['label', 'meta'],
+            unwrapTags: ['sub', 'sup']
+        },
+        anchorPreview: {
+            hideDelay: 300
+        },
+        placeholder: {
+            text: 'Click to edit'
+        }
+    });
+        //editable class is send through CommentFrom class via widget as from.as_p is called all thing from CommentFrom class
+        </script>
 {% endblock %}
